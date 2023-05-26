@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
     machine2.vm.network "private_network", ip: "192.168.10.11"
   end
 
-  config.vm.define "load-balancer" do |machine3|
+  config.vm.define "loadbalancer" do |machine3|
     machine3.vm.box = "ubuntu/bionic64"
     machine3.vm.network "private_network", ip: "192.168.10.12"
   end
@@ -19,6 +19,6 @@ Vagrant.configure("2") do |config|
   # Allow SSH from the host machine to each of the machines
   config.vm.provision "shell", inline: "echo '192.168.10.10 webserver1' >> /etc/hosts"
   config.vm.provision "shell", inline: "echo '192.168.10.11 webserver2' >> /etc/hosts"
-  config.vm.provision "shell", inline: "echo '192.168.10.12 load-balancer' >> /etc/hosts"
+  config.vm.provision "shell", inline: "echo '192.168.10.12 loadbalancer' >> /etc/hosts"
 
 end
