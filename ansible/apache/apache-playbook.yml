@@ -1,0 +1,24 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Install apache
+      apt: name=apache2 update_cache=yes state=latest
+
+    - name: Install PHP
+      apt: name=php update_cache=yes state=latest
+
+    - name: Remove Apache index file
+      file:
+        path: "/var/www/html/index.html"
+        state: absent
+
+    - name: Copy index.php
+      template:
+        src: "index.php"
+        dest: "/var/www/html/index.php"
+
+    - name: Start apache
+      service:
+        name: apache2
+        state: restarted

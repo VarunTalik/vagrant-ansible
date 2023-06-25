@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: Install HAProxy
+      apt: name=haproxy update_cache=yes state=latest
+
+    - name: Copy haproxy.cfg
+      template:
+        src: "haproxy.cfg"
+        dest: "/etc/haproxy/haproxy.cfg"
+
+    - name: Start Haproxy
+      service:
+        name: haproxy
+        state: restarted
